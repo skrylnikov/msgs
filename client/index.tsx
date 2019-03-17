@@ -1,27 +1,33 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { App } from './app'
-import Msgpack from 'msgpack5';
+
+import { http, echo, status } from './api';
 
 render(<App />, document.getElementById('root'));
 
-const msqpack = Msgpack();
 
 (async () => {
-  const r = await fetch('http://127.0.0.1:4000', {
-    method: 'POST',
-    body: msqpack.encode({ lol: 7 }) as any,
-    headers: [['Content-Type', 'application/octet-stream']]
+  const result = await echo({
+    test: [7, 3, 5],
+    hello: 'world',
   });
 
+  if (http.isError(result)) {
+    console.error(result);
+    return;
+  }
 
+  console.log(result.body);
 
-  const buffer = await r.arrayBuffer();
+  const statusResult = await status();
 
-  const result = msqpack.decode(buffer as any);
+  if (http.isError(statusResult)) {
+    console.error(statusResult);
+    return;
+  }
 
-  console.log(r);
-  console.log(buffer);
-  console.log(result);
+  console.log(statusResult.body);
+
 })()
 

@@ -1,46 +1,16 @@
-import { Express, IResponse, IRequest } from './types/express';
-import Msgpack from 'msgpack5';
+import { Express } from './types/express';
 
 import { applyMiddleware } from './middleware';
+
+import { applyRoutes } from './controllers';
 
 
 const app = Express();
 
 applyMiddleware(app);
 
-app.get('/', (req, res) => {
-
-  res.send(msgpack.encode({
-    message: 'kek',
-  }));
-});
-
-
-app.post('/', (req: IRequest, res: IResponse) => {
-
-  console.log('post request');
-
-  const body = req.body;
-
-  console.log(body);
-  res.sendMsg({
-    message: 'kek1',
-  });
-
-});
+applyRoutes(app);
 
 app.listen(4000);
 
-const msgpack = Msgpack();
-
-const data = msgpack.encode({
-  hello: 'world',
-  kek: 5,
-});
-
-console.log(data);
-
-const result = msgpack.decode(data);
-
-console.log(result);
-
+console.log('start');

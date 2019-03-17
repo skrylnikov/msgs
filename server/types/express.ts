@@ -1,4 +1,4 @@
-import Express, { Request, Response, NextFunction } from 'express';
+import Express, { Request, Response, NextFunction, Router } from 'express';
 
 interface IRequest<Body=any> extends Request {
   body: Body;
@@ -15,4 +15,5 @@ export {
   IResponse,
   INext,
   Express,
+  Router,
 }
