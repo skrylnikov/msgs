@@ -1,7 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { Chat } from './features';
+
+import { ChatContainer } from './features/chat/components/chat.container';
+
+import { store } from './features/store';
+import { updateMessageList } from './features/chat/actions';
 
 
 const Wrapper = styled.div`
@@ -17,13 +22,17 @@ const GlobalStyle = createGlobalStyle`
 
 
 const App = () => (
-  <Wrapper>
-    <GlobalStyle />
-    <section>
-      <Chat />
-    </section>
-  </Wrapper>
+  <Provider store={store}>
+    <Wrapper>
+      <GlobalStyle />
+      <section>
+        <ChatContainer />
+      </section>
+    </Wrapper>
+  </Provider>
 );
+
+store.dispatch(updateMessageList());
 
 export {
   App,
