@@ -1,35 +1,26 @@
-import { put } from 'redux-saga/effects';
-import { Message } from '../types';
+import { put, call, select } from 'redux-saga/effects';
 import { updateMessageListSuccess } from '../actions';
+
+import { MessageApi, http } from '../../../api';
+
+import { Message } from '../types';
+import { Store } from '../../reducers';
 
 function* updateChartListSaga() {
 
-  const messageList: Message[] = [
-    {
-      messageType: 'text',
-      text: 'message1',
-      isMyMessage: false,
-      author: 'Author1',
-    },
-    {
-      messageType: 'text',
-      text: 'message2',
-      isMyMessage: true,
-      author: 'Author7',
-    },
-    {
-      messageType: 'text',
-      text: 'message3',
-      isMyMessage: false,
-      author: 'Author1',
-    },
-    {
-      messageType: 'text',
-      text: 'message4',
-      isMyMessage: false,
-      author: 'Author2',
-    },
-  ];
+  const store: Store = yield select();
+
+  const messageListResponse: MessageApi.ResponseList = yield call(MessageApi.list);
+
+  if (http.isError(messageListResponse)) {
+    console.error(messageListResponse);
+    return;
+  }
+
+  const messageList: Message[] = messageListResponse.body.map((x) => ({
+    ...x,
+    isMyMessage: store.chat.username === x.author,
+  }));
 
   yield put(updateMessageListSuccess(messageList));
 

@@ -1,13 +1,10 @@
-type MessageType = 'text';
+import { IMessage } from '../../../types';
 
-interface Message {
-  messageType: MessageType;
-  text: string;
+
+interface Message extends IMessage.Message {
   isMyMessage: boolean;
-  author: string;
 }
 
 export {
   Message,
-  MessageType,
 }

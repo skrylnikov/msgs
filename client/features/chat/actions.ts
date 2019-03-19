@@ -9,7 +9,7 @@ enum ActionChartTypes {
   updateMessageListSuccess = '[chat] updateMessageListSuccess',
 }
 
-const sendMessage = (text: string) => action(ActionChartTypes.sendMessage, { text });
+const sendMessage = (text: string, username: string) => action(ActionChartTypes.sendMessage, { text, username });
 
 type SendMessageAction = ReturnType<typeof sendMessage>;
 

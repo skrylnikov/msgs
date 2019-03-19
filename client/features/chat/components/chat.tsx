@@ -7,7 +7,7 @@ import console = require('console');
 import { Message } from '../types';
 
 interface Props {
-  sendMessage: (text: string) => void;
+  sendMessage: (text: string, username: string) => void;
   messageList: Message[];
 }
 
