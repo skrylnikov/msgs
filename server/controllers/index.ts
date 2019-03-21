@@ -3,12 +3,14 @@ import { Router, Express } from 'express';
 import Echo from './echo';
 import Status from './status';
 import Message from './message';
+import Poll from './poll';
 
 
 const routes = {
   '/echo': Echo,
   '/status': Status,
   '/message': Message,
+  '/poll': Poll,
 };
 
 

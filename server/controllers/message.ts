@@ -2,6 +2,9 @@ import { Router, IResponse, IRequest } from '../types/express';
 
 import { IMessage, IApi } from '../../types';
 
+import { Poll } from '../shared';
+import { EventType } from '../../types/api';
+
 const router = Router();
 
 const messageList: IMessage.Message[] = [];
@@ -22,6 +25,8 @@ router.post('/', (req: IRequest<Body>, res: IResponse) => {
     ...req.body.message,
     id: messageList.length,
   });
+
+  Poll.poll.send(EventType.updateMessageList, messageList);
 
   res.sendMsg({ status: IApi.Status.ok });
 });
