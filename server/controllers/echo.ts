@@ -7,4 +7,9 @@ router.post('/', (req, res: IResponse) => {
   res.sendMsg(req.body);
 });
 
+export const echo = <T>(data: T) => {
+  console.log(data);
+  return data;
+};
+
 export default router;

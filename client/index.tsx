@@ -6,7 +6,7 @@ import 'normalize.css';
 
 import { http, echo, status } from './api';
 
-render(<App />, document.getElementById('root'));
+//render(<App />, document.getElementById('root'));
 
 
 (async () => {
@@ -15,6 +15,9 @@ render(<App />, document.getElementById('root'));
     hello: 'world',
   });
 
+  console.log(result);
+
+  /*
   if (http.isError(result)) {
     console.error(result);
     return;
@@ -30,6 +33,5 @@ render(<App />, document.getElementById('root'));
   }
 
   console.log(statusResult.body);
-
+  */
 })()
-

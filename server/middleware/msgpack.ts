@@ -1,5 +1,5 @@
-import Msqpack from 'msgpack5';
 import { Request, Response, NextFunction } from 'express';
+import Msqpack from 'msgpack5';
 
 const msgpack = Msqpack();
 

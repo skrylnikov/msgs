@@ -1,9 +1,11 @@
 import { Router, Express } from 'express';
 
-import Echo from './echo';
+import Echo, { echo } from './echo';
 import Status from './status';
 import Message from './message';
 import Poll from './poll';
+
+import { ISocket } from '../../types';
 
 
 const routes = {
@@ -24,7 +26,12 @@ const applyRoutes = (app: Express) => {
   setRoutes(routes, app);
 };
 
+const controllerMap = new Map([
+  [ISocket.EventType.echo, echo],
+]);
+
 export {
   setRoutes,
   applyRoutes,
+  controllerMap,
 }

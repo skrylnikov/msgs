@@ -1,6 +1,8 @@
-import { post } from './http';
+import { sendRequest } from './socket';
 
-const echo = <T=any>(data: T) => post<T>('echo', data);
+import { ISocket } from '../../types';
+
+const echo = <T=any>(data: T) => sendRequest<T>({ type: ISocket.EventType.echo, data });
 
 export {
   echo,
