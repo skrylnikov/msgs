@@ -3,13 +3,20 @@ import Msgpack from 'msgpack5';
 
 import { ISocket } from '../types';
 
-import { controllerMap } from './controllers';
+import { controllerList } from './controllers';
 
 const msgpack = Msgpack();
 
 const io = SocketIO({});
 
 io.origins('*:*');
+const sendAll = (message: ISocket.Events) => {
+  io.emit('event', msgpack.encode({
+    type: message.type,
+    data: message.data,
+    corr: null,
+  }));
+};
 
 io.on('connection', (client) => {
   console.log('connected');
@@ -17,14 +24,16 @@ io.on('connection', (client) => {
   client.on('event', async (rawBody: any) => {
     const body: ISocket.Events = msgpack.decode(rawBody);
 
-    if (!controllerMap.has(body.type)) {
+
+    const func = controllerList[body.type];
+
+    if (!func) {
       console.error(body);
       return;
     }
 
-    const func = controllerMap.get(body.type);
 
-    const result = await func(body.data);
+    const result = await func(body.data, { sendAll });
     if (!result) {
       return;
     }

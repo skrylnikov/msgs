@@ -1,3 +1,5 @@
+import { Message } from './message';
+
 enum EventType {
   'echo' = -1,
   'status' = 0,
@@ -6,16 +8,31 @@ enum EventType {
 }
 
 interface EchoEvent<Data=any> {
-  type: EventType;
+  type: EventType.echo;
   data: Data;
   corr?: string | null;
 }
 
-type Events = EchoEvent;
+interface SendMessageEvent {
+  type: EventType.sendMessage;
+  data: Message;
+  corr?: string | null;
+}
+
+interface MessageListEvent {
+  type: EventType.messageList;
+  data: Message[];
+  corr?: string | null;
+}
+
+
+
+type Events = EchoEvent | SendMessageEvent | MessageListEvent;
 
 export {
   EventType,
   EchoEvent,
   Events,
-
+  SendMessageEvent,
+  MessageListEvent,
 }

@@ -1,34 +1,20 @@
-import { Router, IResponse, IRequest } from '../types/express';
-
-import { IMessage, IApi } from '../../types';
-
-import { Poll } from '../shared';
-import { EventType } from '../../types/api';
-
-const router = Router();
+import { IMessage, ISocket } from '../../types';
+import { Options } from '../types/socket';
 
 const messageList: IMessage.Message[] = [];
 
-router.get('/', (req, res: IResponse) => {
-  console.log(messageList);
-  res.sendMsg(messageList);
-});
-
-interface Body {
-  message: IMessage.Message;
-}
 
 
-router.post('/', (req: IRequest<Body>, res: IResponse) => {
-  console.log(req.body.message);
+export const sendMessage = (message: IMessage.Message, { sendAll }: Options) => {
+  console.log(message);
   messageList.push({
-    ...req.body.message,
+    ...message,
     id: messageList.length,
   });
 
-  Poll.poll.send(EventType.updateMessageList, messageList);
+  sendAll({
+    type: ISocket.EventType.messageList,
+    data: messageList,
+  });
+}
 
-  res.sendMsg({ status: IApi.Status.ok });
-});
-
-export default router;

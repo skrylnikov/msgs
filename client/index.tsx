@@ -6,7 +6,7 @@ import 'normalize.css';
 
 import { http, echo, status } from './api';
 
-//render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
 
 
 (async () => {

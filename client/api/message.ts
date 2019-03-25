@@ -1,6 +1,8 @@
 import { post, get } from './http';
 
-import { IApi, IMessage } from '../../types';
+import { IApi, IMessage, ISocket } from '../../types';
+
+import { send, subscribe } from './socket';
 
 type Unpacked<T> =
   T extends (infer U)[] ? U :
@@ -8,17 +10,14 @@ type Unpacked<T> =
   T extends Promise<infer U> ? U :
   T;
 
-const list = () => get<IMessage.Message[]>('message');
+const subscribeMessageUpdate = (func: (message: IMessage.Message[]) => void) => subscribe(ISocket.EventType.messageList, func);
 
-type ResponseList = Unpacked<ReturnType<typeof list>>;
-
-const send = (message: IMessage.Message) => post<{ status: IApi.Status }>('message', { message });
+const sendMessage = (message: IMessage.Message) => send({ type: ISocket.EventType.sendMessage, data: message });
 
 type ResponseSend = Unpacked<ReturnType<typeof send>>;
 
 export {
-  list,
-  send,
-  ResponseList,
+  sendMessage,
   ResponseSend,
+  subscribeMessageUpdate,
 };
