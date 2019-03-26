@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "effector": "^0.18.4",
+    "effector-react": "^0.18.7",
     "funcs-ts": "^0.2.0",
     "msgpack5": "^4.2.1",
     "nanoid": "^2.0.1",

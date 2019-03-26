@@ -5,6 +5,8 @@ import { ISocket } from '../types';
 
 import { controllerList } from './controllers';
 
+import { subscribeConnectSet } from './socket';
+
 const msgpack = Msgpack();
 
 const io = SocketIO({});
@@ -18,8 +20,18 @@ const sendAll = (message: ISocket.Events) => {
   }));
 };
 
+
 io.on('connection', (client) => {
   console.log('connected');
+
+  subscribeConnectSet.forEach(async (func) => {
+    const result = await func();
+    client.emit('event', msgpack.encode({
+      type: result.type,
+      data: result.data,
+      corr: null,
+    }));
+  })
 
   client.on('event', async (rawBody: any) => {
     const body: ISocket.Events = msgpack.decode(rawBody);

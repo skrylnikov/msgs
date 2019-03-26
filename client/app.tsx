@@ -6,8 +6,6 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { ChatContainer } from './features/chat/components/chat.container';
 
 import { store } from './features/store';
-import { updateMessageList } from './features/chat/actions';
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,8 +29,6 @@ const App = () => (
     </Wrapper>
   </Provider>
 );
-
-store.dispatch(updateMessageList());
 
 export {
   App,

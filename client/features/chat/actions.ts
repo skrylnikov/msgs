@@ -4,28 +4,15 @@ import { Message } from './types';
 
 enum ActionChartTypes {
   sendMessage = '[chat] sendMessage',
-
-  updateMessageList = '[chat] updateMessageList',
-  updateMessageListSuccess = '[chat] updateMessageListSuccess',
 }
 
 const sendMessage = (text: string, username: string) => action(ActionChartTypes.sendMessage, { text, username });
 
 type SendMessageAction = ReturnType<typeof sendMessage>;
 
-const updateMessageList = () => action(ActionChartTypes.updateMessageList);
-
-type UpdateMessageListAction = ReturnType<typeof updateMessageList>;
-
-const updateMessageListSuccess = (messageList: Message[]) => action(ActionChartTypes.updateMessageListSuccess, { messageList });
-
-type UpdateMessageListSuccessAction = ReturnType<typeof updateMessageListSuccess>;
-
 
 type ActionType =
   | SendMessageAction
-  | UpdateMessageListAction
-  | UpdateMessageListSuccessAction
   ;
 
 
@@ -34,8 +21,4 @@ export {
   ActionChartTypes,
   sendMessage,
   SendMessageAction,
-  updateMessageList,
-  UpdateMessageListAction,
-  updateMessageListSuccess,
-  UpdateMessageListSuccessAction,
 };

@@ -1,20 +1,26 @@
 import React from 'react';
 import { Wrapper, Scroll } from './messageList.style';
 import { Message } from './message';
-import { Message as IMessage } from '../types';
+
+import { createStoreConsumer } from 'effector-react';
+
+import { store } from '../store';
+
+const MessageListStore = createStoreConsumer(store);
 
 interface Props {
-  messageList: IMessage[];
 }
 
-const MessageList = ({ messageList }: Props) => {
+const MessageList = ({ }: Props) => {
 
   return (
     <Scroll>
       <Wrapper>
-        {messageList.map((message) => (
-          <Message key={message.text} author={message.author} text={message.text} isMyMessage={message.isMyMessage} />
-        ))}
+        <MessageListStore>
+          {store => store.messageList.map((message) => (
+            <Message key={message.text} author={message.author} text={message.text} isMyMessage={message.isMyMessage} />
+          ))}
+        </MessageListStore>
       </Wrapper>
     </Scroll>
   )

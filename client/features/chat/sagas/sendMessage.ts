@@ -1,17 +1,11 @@
-import { put, call } from 'redux-saga/effects';
-import { SendMessageAction, updateMessageListSuccess } from '../actions';
+import { call } from 'redux-saga/effects';
+import { SendMessageAction } from '../actions';
 
-import { MessageApi, http } from '../../../api';
+import { MessageApi } from '../../../api';
 
 import { IMessage } from '../../../../types';
 
-import { store } from '../../store';
 
-
-MessageApi.subscribeMessageUpdate((data) => {
-  const state = store.getState();
-  store.dispatch(updateMessageListSuccess(data.map((x) => ({ ...x, isMyMessage: state.chat.username === x.author }))));
-});
 
 function* sendMessageSaga(action: SendMessageAction) {
 
