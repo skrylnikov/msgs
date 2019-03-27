@@ -7,7 +7,7 @@ interface Props {
   isMyMessage: boolean;
 }
 
-const Message = ({ text, isMyMessage, author }: Props) => {
+const MessageComponent = ({ text, isMyMessage, author }: Props) => {
 
   return (
     <Wrapper style={{ alignSelf: isMyMessage ? 'flex-end' : undefined }}>
@@ -18,5 +18,5 @@ const Message = ({ text, isMyMessage, author }: Props) => {
 }
 
 export {
-  Message,
+  MessageComponent,
 };

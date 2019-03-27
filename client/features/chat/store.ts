@@ -1,15 +1,14 @@
-import { createEvent, createStore, createStoreObject } from 'effector';
+import { createStore, createStoreObject } from 'effector';
 
 import { MessageApi } from '../../api';
 import { Message as IIMessage } from '../../../types/message';
 
-import { Message } from './types';
+import { Message, } from './types';
 
-const onChangeName = createEvent<string>(' change name');
+import { onChangeName, onMessageList } from './events';
 
 const userName = createStore<string>(localStorage.getItem('username') || '').on(onChangeName, (_state, payload) => payload);
 
-const onMessageList = createEvent<IIMessage[]>('message list');
 
 MessageApi.subscribeMessageUpdate((data) => onMessageList(data));
 
@@ -25,4 +24,5 @@ const store = createStoreObject({
 
 export {
   store,
+  userName,
 }

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 
 
-import { ChatContainer } from './features/chat/components/chat.container';
+import { ChatComponent } from './features/chat';
 
-import { store } from './features/store';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,14 +18,12 @@ const GlobalStyle = createGlobalStyle`
 
 
 const App = () => (
-  <Provider store={store}>
-    <Wrapper>
-      <GlobalStyle />
-      <section>
-        <ChatContainer />
-      </section>
-    </Wrapper>
-  </Provider>
+  <Wrapper>
+    <GlobalStyle />
+    <section>
+      <ChatComponent />
+    </section>
+  </Wrapper>
 );
 
 export {

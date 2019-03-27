@@ -1,18 +1,21 @@
 import React, { useState, useCallback } from 'react';
 import { Wrapper, Textarea, Button } from './sendPanel.style';
 
+import { sendMessage } from '../effects';
+import { onChangeName } from '../events';
+
 interface Props {
-  send: (text: string, username: string) => void;
 }
 
-const SendPanel = ({ send }: Props) => {
+const SendPanelComponent = ({ }: Props) => {
 
   const [text, setText] = useState('');
 
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
   const onSend = useCallback(() => {
-    send(text, username);
+    onChangeName(username);
+    sendMessage(text);
     setTimeout(() => setText(''), 20);
     localStorage.setItem('username', username);
   }, [text, username]);
@@ -29,5 +32,5 @@ const SendPanel = ({ send }: Props) => {
 }
 
 export {
-  SendPanel,
+  SendPanelComponent,
 };

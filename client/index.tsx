@@ -17,21 +17,4 @@ render(<App />, document.getElementById('root'));
 
   console.log(result);
 
-  /*
-  if (http.isError(result)) {
-    console.error(result);
-    return;
-  }
-
-  console.log(result.body);
-
-  const statusResult = await status();
-
-  if (http.isError(statusResult)) {
-    console.error(statusResult);
-    return;
-  }
-
-  console.log(statusResult.body);
-  */
 })()

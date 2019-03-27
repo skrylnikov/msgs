@@ -1,24 +1,23 @@
 import React from 'react';
 import { Wrapper, Header } from './chat.styled';
 
-import { MessageList } from './messageList';
-import { SendPanel } from './sendPanel'
+import { MessageListComponent } from './messageList';
+import { SendPanelComponent } from './sendPanel'
 
 interface Props {
-  sendMessage: (text: string, username: string) => void;
 }
 
-const Chat = ({ sendMessage }: Props) => {
+const ChatComponent = ({ }: Props) => {
 
   return (
     <Wrapper>
       <Header>Chat</Header>
-      <MessageList />
-      <SendPanel send={sendMessage} />
+      <MessageListComponent />
+      <SendPanelComponent />
     </Wrapper>
   )
 }
 
 export {
-  Chat,
+  ChatComponent,
 };
