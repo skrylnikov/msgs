@@ -1,38 +1,30 @@
-import { Message } from './message';
+import { Block } from './block';
 
-enum EventType {
+export enum EventType {
   'echo' = -1,
   'status' = 0,
-  'sendMessage' = 1,
-  'messageList' = 2,
+  'newBlock' = 1,
+  'blockList' = 2,
 }
 
-interface EchoEvent<Data=any> {
+export interface EchoEvent<Data=any> {
   type: EventType.echo;
   data: Data;
   corr?: string | null;
 }
 
-interface SendMessageEvent {
-  type: EventType.sendMessage;
-  data: Message;
+export interface NewBlockEvent {
+  type: EventType.newBlock;
+  data: Block;
   corr?: string | null;
 }
 
-interface MessageListEvent {
-  type: EventType.messageList;
-  data: Message[];
+export interface BlockListEvent {
+  type: EventType.blockList;
+  data: Block[];
   corr?: string | null;
 }
 
 
 
-type Events = EchoEvent | SendMessageEvent | MessageListEvent;
-
-export {
-  EventType,
-  EchoEvent,
-  Events,
-  SendMessageEvent,
-  MessageListEvent,
-}
+export type Events = EchoEvent | NewBlockEvent | BlockListEvent;

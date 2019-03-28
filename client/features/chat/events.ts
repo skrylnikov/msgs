@@ -1,11 +1,12 @@
 import { createEvent } from 'effector';
 
-import { IMessage } from '../../../types';
+import { IBlock } from '../../../types';
 
+import { Message } from './types';
 
 const onChangeName = createEvent<string>(' change name');
 
-const onMessageList = createEvent<IMessage.Message[]>('message list');
+const onMessageList = createEvent<IBlock.Block<Message>[]>('message list');
 
 export {
   onChangeName,

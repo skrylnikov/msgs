@@ -4,7 +4,7 @@ import { App } from './app'
 
 import 'normalize.css';
 
-import { http, echo, status } from './api';
+import { echo } from './api';
 
 render(<App />, document.getElementById('root'));
 

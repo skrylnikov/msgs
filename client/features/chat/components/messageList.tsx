@@ -18,7 +18,7 @@ const MessageListComponent = ({ }: Props) => {
       <Wrapper>
         <MessageListStore>
           {store => store.messageList.map((message) => (
-            <MessageComponent key={message.text} author={message.author} text={message.text} isMyMessage={message.isMyMessage} />
+            <MessageComponent key={message.blockHash} author={message.author} text={message.text} isMyMessage={message.isMyMessage} />
           ))}
         </MessageListStore>
       </Wrapper>

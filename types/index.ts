@@ -1,9 +1,7 @@
-import * as IApi from './api';
-import * as IMessage from './message';
 import * as ISocket from './socket';
+import * as IBlock from './block';
 
 export {
-  IApi,
-  IMessage,
   ISocket,
+  IBlock,
 }

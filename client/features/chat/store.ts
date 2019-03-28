@@ -1,9 +1,10 @@
 import { createStore, createStoreObject } from 'effector';
 
 import { MessageApi } from '../../api';
-import { Message as IIMessage } from '../../../types/message';
 
-import { Message, } from './types';
+import { IBlock } from '../../../types';
+
+import { Message, MessageView } from './types';
 
 import { onChangeName, onMessageList } from './events';
 
@@ -12,11 +13,14 @@ const userName = createStore<string>(localStorage.getItem('username') || '').on(
 
 MessageApi.subscribeMessageUpdate((data) => onMessageList(data));
 
-const messageList = createStore<Message[]>([])
-  .on<IIMessage[]>(onMessageList, (_state, payload) =>
-    payload.map((x) => ({ ...x, isMyMessage: x.author === userName.getState() })));
+const messageList = createStore<MessageView[]>([])
+  .on<IBlock.Block<Message>[]>(onMessageList, (_state, payload) =>
+    payload.map((x) => ({ ...x.data, isMyMessage: x.data.author === userName.getState(), blockHash: x.blockHash })));
 
-messageList.watch(console.log)
+messageList.watch(console.log);
+
+const blockListStore = createStore<IBlock.Block<Message>[]>([])
+  .on<IBlock.Block<Message>[]>(onMessageList, (_state, payload) => payload);
 
 const store = createStoreObject({
   messageList,
@@ -25,4 +29,5 @@ const store = createStoreObject({
 export {
   store,
   userName,
+  blockListStore,
 }

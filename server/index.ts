@@ -62,3 +62,5 @@ io.on('connection', (client) => {
 
 
 io.listen(3000);
+
+console.log('start');

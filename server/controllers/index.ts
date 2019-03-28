@@ -7,13 +7,13 @@ import { ISocket } from '../../types';
 
 const controllerMap = new Map([
   [ISocket.EventType.echo, echo],
-  [ISocket.EventType.sendMessage, sendMessage],
+  [ISocket.EventType.newBlock, sendMessage],
 ]);
 
 const controllerList = {
   [ISocket.EventType.echo]: echo,
-  [ISocket.EventType.sendMessage]: sendMessage,
-  [ISocket.EventType.messageList]: () => ({}),
+  [ISocket.EventType.newBlock]: sendMessage,
+  [ISocket.EventType.blockList]: () => ({}),
   [ISocket.EventType.status]: status,
 }
 
