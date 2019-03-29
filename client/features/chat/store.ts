@@ -22,6 +22,9 @@ messageList.watch(console.log);
 const blockListStore = createStore<IBlock.Block<Message>[]>([])
   .on<IBlock.Block<Message>[]>(onMessageList, (_state, payload) => payload);
 
+
+blockListStore.watch(console.log);
+
 const store = createStoreObject({
   messageList,
 });
