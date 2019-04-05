@@ -3,13 +3,14 @@ FROM node:current-alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-RUN mkdir ./__data
+RUN mkdir __data
 
-VOLUME ./__data
+VOLUME /usr/src/app/__data
 
-RUN apk add --update make
-RUN apk add --update g++
-RUN apk add --update python
+RUN apk add --update --no-cache \
+  make \
+  g++ \
+  python
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -21,11 +22,12 @@ RUN npm ci
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY ./tsconfig.json ./
-COPY ./types ./types
-COPY ./server ./server
+COPY tsconfig.json .
+COPY types types
+COPY server server
 
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+ENTRYPOINT [ "npm" ]
+CMD [ "start" ]
