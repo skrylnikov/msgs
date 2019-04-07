@@ -8,7 +8,7 @@ import nanoid from 'nanoid';
 
 const msgpack = Msqpack();
 
-const socket = io.connect(':3000', {
+const socket = io.connect(':2784', {
   transports: ['websocket', 'polling'],
 });
 
