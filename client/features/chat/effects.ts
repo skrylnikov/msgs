@@ -11,21 +11,28 @@ import { IBlock } from '../../../types';
 import { SHA3 } from 'sha3';
 
 import MsgPack from 'msgpack5';
+import { Sign } from '../../crypto';
 
 const msgpack = MsgPack();
 
 const sendMessage = createEffect<string, void, void>('sendMessage')
-  .use((text) => {
+  .use(async (text) => {
+    const realText = text.trim();
+
+    if (realText.length === 0) {
+      return;
+    }
 
     const blockList = blockListStore.getState();
 
     const data: Message = {
       messageType: MessageType.text,
-      text,
+      text: realText,
       author: userName.getState(),
     };
 
     const meta: IBlock.BlockMeta = {
+      sign: await Sign.sign(data),
       version: 0,
       blockLevel: blockList.length,
       prevBlockHashList: blockList.length ? [blockList[0].blockHash] : [],
