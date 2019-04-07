@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 1rem;
   margin: 0.3rem;
+    @media (max-width: 600px){
+      margin: 0.1rem;
+    }
 `;
 
 const Author = styled.p`
