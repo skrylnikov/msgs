@@ -14,8 +14,8 @@ const Textarea = styled.textarea`
   width: 80%;
   height: 5rem;
     @media (max-width: 600px){
-      width: 98%;
-      margin: 5px;
+      width: inherit;
+      margin-bottom: 5px;
     } 
 `;
 
