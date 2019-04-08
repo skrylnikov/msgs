@@ -11,4 +11,5 @@ export interface Message {
 export interface MessageView extends Message {
   isMyMessage: boolean;
   blockHash: string;
+  date: string;
 }

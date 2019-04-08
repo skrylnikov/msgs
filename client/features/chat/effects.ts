@@ -18,8 +18,8 @@ const msgpack = MsgPack();
 const sendMessage = createEffect<string, void, void>('sendMessage')
   .use(async (text) => {
     const realText = text.trim();
-
-    if (realText.length === 0) {
+    const author = userName.getState().trim();
+    if (realText.length === 0 || author.length === 0) {
       return;
     }
 
@@ -28,7 +28,7 @@ const sendMessage = createEffect<string, void, void>('sendMessage')
     const data: Message = {
       messageType: MessageType.text,
       text: realText,
-      author: userName.getState(),
+      author,
     };
 
     const meta: IBlock.BlockMeta = {
@@ -36,6 +36,7 @@ const sendMessage = createEffect<string, void, void>('sendMessage')
       version: 0,
       blockLevel: blockList.length,
       prevBlockHashList: blockList.length ? [blockList[0].blockHash] : [],
+      date: new Date().valueOf(),
     };
 
     const hash = new SHA3(512);

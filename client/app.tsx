@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-
+import 'babel-polyfill';
 
 import { ChatComponent } from './features/chat';
 

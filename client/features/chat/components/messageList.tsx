@@ -24,7 +24,13 @@ const MessageListComponent = ({ }: Props) => {
               ref.current.scrollTop = ref.current.scrollHeight;
             }, 100)
             return store.messageList.map((message) => (
-              <MessageComponent key={message.blockHash} author={message.author} text={message.text} isMyMessage={message.isMyMessage} />
+              <MessageComponent 
+                key={message.blockHash} 
+                author={message.author} 
+                text={message.text} 
+                isMyMessage={message.isMyMessage} 
+                date={message.date}
+              />
             ))
           }}
         </MessageListStore>

@@ -3,6 +3,7 @@ export interface BlockMeta {
   prevBlockHashList: string[];
   blockLevel: number;
   sign: string;
+  date: number;
 }
 
 export interface Block<BlockData = any> {

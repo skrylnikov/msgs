@@ -3,7 +3,9 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   padding: 0.5rem;
   display: flex;
-  width: 10rem;
+  min-width: 8rem;
+  max-width: 20rem;
+  width: max-content;
   flex-direction: column;
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 1rem;
