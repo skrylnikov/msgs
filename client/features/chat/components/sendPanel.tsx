@@ -22,9 +22,9 @@ const SendPanelComponent = ({ }: Props) => {
 
   return (
     <Wrapper>
-      <Textarea value={text} onKeyPress={(e) => e.key === 'Enter' && onSend()} onChange={(e) => setText(e.target.value)} />
+      <Textarea value={text} placeholder="Enter your message" onKeyPress={(e) => e.key === 'Enter' && onSend()} onChange={(e) => setText(e.target.value)} />
       <div>
-        <input value={username} placeholder=username onChange={(e) => setUsername(e.target.value)} />
+        <input value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)} />
         <Button onClick={() => onSend()}>Send</Button>
       </div>
     </Wrapper>
