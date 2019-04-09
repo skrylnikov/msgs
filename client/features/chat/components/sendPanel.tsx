@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Wrapper, Textarea, Button } from './sendPanel.style';
+import { Wrapper, Textarea, Button, Username } from './sendPanel.style';
 
 import { sendMessage } from '../effects';
 import { onChangeName } from '../events';
@@ -24,7 +24,7 @@ const SendPanelComponent = ({ }: Props) => {
     <Wrapper>
       <Textarea value={text} placeholder="Enter your message" onKeyPress={(e) => e.key === 'Enter' && onSend()} onChange={(e) => setText(e.target.value)} />
       <div>
-        <input value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)} />
+        <Username value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)} />
         <Button onClick={() => onSend()}>Send</Button>
       </div>
     </Wrapper>

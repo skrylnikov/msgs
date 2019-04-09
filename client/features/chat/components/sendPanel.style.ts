@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   padding: 0.5rem;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   } 
 `;
 
-const Textarea = styled.textarea`
+export const Textarea = styled.textarea`
   width: 80%;
   height: 5rem;
     @media (max-width: 600px){
@@ -19,11 +19,18 @@ const Textarea = styled.textarea`
     } 
 `;
 
-const Button = styled.button``;
+export const Username = styled.input`
+  margin-left: 5px;
+  @media (max-width: 600px){
+    margin: 0;
+  }
+`;
 
-export {
-  Wrapper,
-  Textarea,
-  Button,
-}
-
+export const Button = styled.button`
+  margin-left: 5px;
+  margin-top: 5px;
+    @media (max-width: 600px){
+      margin: 0;
+      margin-left: 5px;
+    }
+`;
