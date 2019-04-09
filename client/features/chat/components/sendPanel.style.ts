@@ -13,14 +13,16 @@ export const Wrapper = styled.div`
 export const Textarea = styled.textarea`
   width: 80%;
   height: 5rem;
-    @media (max-width: 600px){
-      width: inherit;
-      margin-bottom: 5px;
-    } 
+
+  @media (max-width: 600px){
+    width: inherit;
+    margin-bottom: 5px;
+  } 
 `;
 
 export const Username = styled.input`
   margin-left: 5px;
+
   @media (max-width: 600px){
     margin: 0;
   }
@@ -29,8 +31,9 @@ export const Username = styled.input`
 export const Button = styled.button`
   margin-left: 5px;
   margin-top: 5px;
-    @media (max-width: 600px){
-      margin: 0;
-      margin-left: 5px;
-    }
+
+  @media (max-width: 600px){
+    margin: 0;
+    margin-left: 5px;
+  }
 `;

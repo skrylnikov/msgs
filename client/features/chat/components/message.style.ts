@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   max-width: 20rem;
   width: max-content;
   flex-direction: column;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: 1rem;
   margin: 0.3rem;
     @media (max-width: 600px){
