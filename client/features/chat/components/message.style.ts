@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: max-content;
   flex-direction: column;
   border: 1px solid ${(props) => props.theme.colors.border};
+  transition: border 300ms ease;
   border-radius: 1rem;
   margin: 0.3rem;
     @media (max-width: 600px){

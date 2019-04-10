@@ -5,6 +5,7 @@ const Header = styled.h1`
   border-bottom: 1px solid ${(props) => props.theme.colors.borderMini};
   margin: 0;
   height: 3rem;
+  transition: border 300ms ease;
 `;
 
 const Wrapper = styled.div`
@@ -15,6 +16,7 @@ const Wrapper = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border};
   display: flex;
   flex-direction: column;
+  transition: border 300ms ease;
 `;
 
 

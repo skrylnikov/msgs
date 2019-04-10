@@ -18,12 +18,14 @@ export const ThemeComponent = () => {
       <p>Theme:</p>
       <ThemeStore>
         {(activeTheme) => (
-          <select onChange={() => { }} value={activeTheme} name="theme" >
+          <select onChange={(e) => {
+            const theme = e.target.value;
+
+            localStorage.setItem('theme', theme);
+            onChangeTheme(theme);
+          }} value={activeTheme} name="theme" >
             {themeList.map((theme) => (
-              <option onClick={() => {
-                localStorage.setItem('theme', theme);
-                onChangeTheme(theme);
-              }} key={theme} value={theme} >{theme}</option>
+              <option key={theme} value={theme} >{theme}</option>
             ))}
           </select>
         )}

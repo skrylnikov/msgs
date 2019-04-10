@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Open Sans', sans-serif;
     background: ${(props) => props.theme.colors.bg};
     color: ${(props) => props.theme.colors.mainText};
+    transition: background 300ms ease, color 300ms ease;
   }
 
   input, 
@@ -34,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     border-color: ${(props) => props.theme.colors.border};
     border-width: 1px;
+    transition: border 300ms ease;
   }
 `;
 
