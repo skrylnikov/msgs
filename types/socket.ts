@@ -5,6 +5,8 @@ export enum EventType {
   'status' = 0,
   'newBlock' = 1,
   'blockList' = 2,
+  'newUserBlock' = 3,
+  'userBlockList' = 4,
 }
 
 export interface EchoEvent<Data=any> {
@@ -25,6 +27,18 @@ export interface BlockListEvent {
   corr?: string | null;
 }
 
+export interface NewUserBlockEvent {
+  type: EventType.newUserBlock;
+  data: Block;
+  corr?: string | null;
+}
+
+export interface UserBlockListEvent {
+  type: EventType.userBlockList;
+  data: Block[];
+  corr?: string | null;
+}
 
 
-export type Events = EchoEvent | NewBlockEvent | BlockListEvent;
+
+export type Events = EchoEvent | NewBlockEvent | BlockListEvent | NewUserBlockEvent | UserBlockListEvent;

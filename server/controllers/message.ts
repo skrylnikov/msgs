@@ -8,7 +8,7 @@ const db = new PouchDB<IBlock.Block>('__data/message');
 
 let messageList: IBlock.Block[] = [];
 
-db.allDocs({ "include_docs": true }).then((x) => messageList = x.rows.map((x) => x.doc));
+db.allDocs({ include_docs: true }).then((x) => messageList = x.rows.map((x) => x.doc));
 
 subscribeConnect(() => ({
   type: ISocket.EventType.blockList,
