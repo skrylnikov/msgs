@@ -15,6 +15,11 @@ import { Sign } from '../../crypto';
 
 const msgpack = MsgPack();
 
+export const setUsername = createEffect<string, void, void>('setUsername')
+  .use(async (newUsername) => {
+
+  });
+
 const sendMessage = createEffect<string, void, void>('sendMessage')
   .use(async (text) => {
     const realText = text.trim();

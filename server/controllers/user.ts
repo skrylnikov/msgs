@@ -2,6 +2,7 @@ import { ISocket, IBlock } from '../../types';
 import { Options } from '../types/socket';
 
 import { subscribeConnect } from '../socket';
+/*
 import PouchDB from 'pouchdb';
 
 const db = new PouchDB<IBlock.Block>('__data/users');
@@ -15,7 +16,9 @@ subscribeConnect(() => ({
   data: userList,
 }));
 
+*/
 export const addUser = async (block: IBlock.Block, { sendAll }: Options) => {
+  /*
   console.log(block);
   userList.push(block);
 
@@ -26,5 +29,6 @@ export const addUser = async (block: IBlock.Block, { sendAll }: Options) => {
     type: ISocket.EventType.userBlockList,
     data: userList,
   });
+  */
 }
 

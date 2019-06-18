@@ -13,6 +13,8 @@ const io = SocketIO({});
 
 io.origins('*:*');
 const sendAll = (message: ISocket.Events) => {
+  console.log(message);
+
   io.emit('event', msgpack.encode({
     type: message.type,
     data: message.data,
