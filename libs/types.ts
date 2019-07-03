@@ -1,0 +1,1 @@
+export type Dictionary<T, K extends keyof any> = { [P in K]: T };

@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/preset-typescript",
+      {
+        "jsxPragma": "h"
+      }
+    ],
+    [
+      "linaria/babel",
+      {
+        "displayName": true
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "pragma": "h"
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread",
+  ]
+}

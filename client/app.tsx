@@ -1,7 +1,16 @@
-import React from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { h } from 'preact';
+//import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { css } from 'linaria';
 import 'babel-polyfill';
 
+
+import { styled } from 'linaria/react';
+
+import { Component } from 'react';
+
+
+
+/*
 import { ChatComponent, SettingComponent } from './features';
 
 import { themeStore } from './features/setting/store';
@@ -9,10 +18,13 @@ import { themeStore } from './features/setting/store';
 import * as Theme from './theme';
 
 import { createStoreConsumer } from 'effector-react';
-
-const ThemeStore = createStoreConsumer(themeStore);
-
-const Wrapper = styled.div`
+*/
+//const ThemeStore = createStoreConsumer(themeStore);
+const Test = styled.div`
+  color: green;
+`;
+const Wrapper = css`
+  color: red;
   display: flex;
   justify-content: center;
 
@@ -22,6 +34,7 @@ const Wrapper = styled.div`
   } 
 `;
 
+/*
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Open Sans', sans-serif;
@@ -38,8 +51,9 @@ const GlobalStyle = createGlobalStyle`
     transition: border 300ms ease;
   }
 `;
+*/
 
-
+/*
 const App = () => (
   <ThemeStore>
     {(theme) => (
@@ -57,8 +71,9 @@ const App = () => (
     )}
   </ThemeStore>
 );
-
-export {
-  App,
-};
-
+*/
+//<Test>kek</Test>
+export const App = () => (<div class={Wrapper}>
+  hello
+  <Test>world</Test>
+</div>)
