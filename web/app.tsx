@@ -10,12 +10,16 @@ import { onChangeTheme } from './features/setting/events';
 
 import { useStore } from 'effector-react';
 
+import { LoginPage } from './pages';
+
 
 const global = css`
 * {
     font-family: 'Open Sans', sans-serif;
+   /*
     background: ${theme.colorBg};
     color: ${theme.colorMainText};
+    */
     transition: background 300ms ease, color 300ms ease;
   }
 
@@ -44,8 +48,15 @@ export const App = () => {
 
   const style = getStyle(themeList[theme]);
 
+
+  return (<div class={cx(global, wrapper)} style={style}>
+    <LoginPage/>
+  </div>)
+
+  /*
   return (<div class={cx(global, wrapper)} style={style}>
     hello
     <button onClick={() => onChangeTheme('night')}>click</button>
   </div>)
+  */
 };
