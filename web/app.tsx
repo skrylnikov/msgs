@@ -19,8 +19,8 @@ const global = css`
    /*
     background: ${theme.colorBg};
     color: ${theme.colorMainText};
-    */
     transition: background 300ms ease, color 300ms ease;
+    */
   }
 
   input, 
@@ -28,7 +28,7 @@ const global = css`
   button {
     border-color: ${theme.colorBorder};
     border-width: 1px;
-    transition: border 300ms ease;
+    /* transition: border 300ms ease; */
   }
 `;
 
