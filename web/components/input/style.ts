@@ -63,16 +63,17 @@ export const label = css`
   }
 `;
 
-export const focused = css`
-  color: gold;
-  .${label} {
-    color: #3f51b5;
-    font-size: 12px;
-    top: 4px;
-    visibility: visible;
-  }
+export const notEmpty = css`
+  font-size: 12px;
+  top: 4px;
+  visibility: visible;
+`;
 
-  .${label}::after{
+export const focused = css`
+  color: #3f51b5;
+  top: 4px;
+  font-size: 12px;
+  ::after{
     background-color: #3f51b5;
     bottom: 20px;
     content: '';
