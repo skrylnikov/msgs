@@ -8,9 +8,11 @@ import useClickAway from 'react-use/lib/useClickAway';
 
 interface Props {
   labelText: string;
+
+  primaryColor: string
 }
 
-export const InputComponent = ({labelText}: Props)=>{
+export const InputComponent = ({labelText, primaryColor: color}: Props)=>{
 
   const ref = useRef(null);
 
@@ -25,7 +27,7 @@ export const InputComponent = ({labelText}: Props)=>{
     console.log(value);
     
 
-return (<div ref={ref} class={wrapper} onClick={()=>changeFocused(true)}>
+return (<div style={{'--input-color':color}} ref={ref} class={wrapper} onClick={()=>changeFocused(true)}>
     <input 
       class={input} 
       value={value}
