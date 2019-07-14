@@ -1,10 +1,10 @@
-import { h, render } from 'preact'
-import { App } from './app'
-
 import 'normalize.css';
+import './style.css';
 import 'babel-polyfill';
-import './theme';
+import { h, render } from 'preact'
 
+import { App } from './app'
+import './theme';
 
 
 function init() {

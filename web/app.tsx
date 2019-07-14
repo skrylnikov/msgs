@@ -15,7 +15,7 @@ import { LoginPage } from './pages';
 
 const global = css`
 * {
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;
    /*
     background: ${theme.colorBg};
     color: ${theme.colorMainText};
