@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useState, useRef } from 'preact/hooks';
+import { useState, useRef, useEffect } from 'preact/hooks';
 import { cx } from 'linaria';
 
 import { wrapper, input, label, focused, notEmpty } from './style';
@@ -8,11 +8,12 @@ import useClickAway from 'react-use/lib/useClickAway';
 
 interface Props {
   labelText: string;
+  color: string
 
-  primaryColor: string
+  onChange: (value: string)=>void;
 }
 
-export const InputComponent = ({labelText, primaryColor: color}: Props)=>{
+export const InputComponent = ({labelText, color, onChange}: Props)=>{
 
   const ref = useRef(null);
 
@@ -23,9 +24,9 @@ export const InputComponent = ({labelText, primaryColor: color}: Props)=>{
     changeFocused(false);
   });
 
-  console.log(isFocused);
-    console.log(value);
-    
+  useEffect(()=>{
+    onChange(value);
+  }, [value]);
 
 return (<div style={{'--input-color':color}} ref={ref} class={wrapper} onClick={()=>changeFocused(true)}>
     <input 
