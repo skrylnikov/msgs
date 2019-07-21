@@ -5,9 +5,15 @@ import { wrapper, page, header } from './style';
 import { InputComponent } from '../../components';
 import { theme } from '../../theme';
 
+import { login } from '../../features/login/effects';
+import { userStore } from '../../features/login/store';
+
+console.log(userStore);
+
+
 export const LoginPage = ({}) => {
 
-  const [login, setLogin] = useState('');
+  const [username, setUsername] = useState('');
 
 
   return (<div class={page}>
@@ -15,10 +21,10 @@ export const LoginPage = ({}) => {
     <div class={wrapper}>
       <h1>Login</h1>
       <p>Welcome to the best decentralized messenger*</p>
-      <InputComponent labelText={'username'} color={theme.colorPrimary} onChange={setLogin}/>
+      <InputComponent labelText={'username'} color={theme.colorPrimary} onChange={setUsername}/>
       <button onClick={()=>{
-        console.log(login);
-      }}>Login</button>
+        login({username});
+}}>Login</button>
     </div>
   </div>)
 };

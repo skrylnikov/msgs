@@ -5,7 +5,7 @@ import { h, render } from 'preact'
 
 import { App } from './app'
 import './theme';
-
+import './socket';
 
 function init() {
   const root = document.getElementById('root');
