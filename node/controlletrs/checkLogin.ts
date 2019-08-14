@@ -1,11 +1,5 @@
 import { CheckLoginRequestPayload } from "../../api/checkLogin";
-import FrameDB from 'framedb';
-
-const userDB = new FrameDB({
-  filePath: './__data/user.json'
-});
-
-
+import { userDB } from '../models';
 
 export const checkLogin = async (data: CheckLoginRequestPayload) =>{
   console.log(data);
@@ -13,9 +7,26 @@ export const checkLogin = async (data: CheckLoginRequestPayload) =>{
     const query ={username: data.username};
     console.log(query);
     
-    const c = await userDB.findOne(query)
-    console.log(c);
+    const _user = await userDB.findOne(query)
+    console.log({_user});
+
+    if(!_user){
+      return {
+        reply: true,
+        payload: null,
+        meta: null,
+      }
+    }
+
+    const {_id, ...user} = _user;
     
+    return {
+      reply: true,
+      payload: {
+        ...user,
+      },
+      meta: null,
+    }
   } catch (e) {
     console.error(e);
   }

@@ -5,8 +5,10 @@ import { MessageTypes } from '../../api';
 import {
   crypto_pwhash,
   crypto_pwhash_SALTBYTES,
+  crypto_pwhash_OPSLIMIT_INTERACTIVE,
   crypto_pwhash_OPSLIMIT_MODERATE,
   crypto_pwhash_MEMLIMIT_MODERATE,
+  crypto_pwhash_MEMLIMIT_INTERACTIVE,
   crypto_pwhash_ALG_ARGON2I13,
 
   crypto_secretbox_KEYBYTES,
@@ -23,41 +25,64 @@ import {
   crypto_box_NONCEBYTES,
   crypto_box_open_easy,
   randombytes_buf,
+  to_base64,
+  from_base64,
 } from 'libsodium-wrappers';
 
 let pwhash: Uint8Array;
+const algorithm = crypto_pwhash_ALG_ARGON2I13;
 
 const createRootKey = (
   password: string,
   opsLimit = crypto_pwhash_OPSLIMIT_MODERATE,
-  memLimit = crypto_pwhash_MEMLIMIT_MODERATE,
+  memLimit = crypto_pwhash_MEMLIMIT_INTERACTIVE,
 ) => {
-  const algorithm = crypto_pwhash_ALG_ARGON2I13;
+  console.log(0);
+  console.time();
   const salt = randombytes_buf(crypto_pwhash_SALTBYTES);
   pwhash = crypto_pwhash(crypto_secretbox_KEYBYTES, password, salt, opsLimit, memLimit, algorithm);
+  console.timeEnd();
+  console.log(pwhash);
   
+
+
   return {
     algorithm,
-    salt,
+    salt: to_base64(salt),
     opsLimit,
     memLimit,
   };
 };
 
+const decodeRootKey = (password: string,
+  saltStr: string,
+  opsLimit = crypto_pwhash_OPSLIMIT_MODERATE,
+  memLimit = crypto_pwhash_MEMLIMIT_INTERACTIVE,
+) => {
+  const salt = from_base64(saltStr);
 
-export const register = async (username: string, password: string) => {
-  /*
-  const a = await senRequst(MessageTypes.checkLogin, {username});
+  pwhash = crypto_pwhash(crypto_secretbox_KEYBYTES, password, salt, opsLimit, memLimit, algorithm);
 
-  console.log(a);
+  console.log(pwhash);
   
 
+};
+
+
+export const register = async (username: string, password: string) => {
   /* */
-  const rootKey = createRootKey(password);
-  await senRequst(MessageTypes.register, {
-    username,
-    rootKey,
-  });
-  /**/
-  return true;
+  const a:any = await senRequst(MessageTypes.checkLogin, { username });
+
+  console.log(a);
+
+  if(a){
+    decodeRootKey(password, a.rootKey.salt);
+  } else {
+    const rootKey = createRootKey(password);
+    await senRequst(MessageTypes.register, {
+      username,
+      rootKey,
+    });
+  }
+    return true;
 }

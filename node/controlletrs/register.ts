@@ -1,11 +1,5 @@
 import { RegisterRequestPayload } from "../../api/register";
-import FrameDB from 'framedb';
-
-const userDB = new FrameDB({
-  filePath: './__data/user.json'
-});
-
-
+import { userDB } from '../models';
 
 export const register = async (data: RegisterRequestPayload) =>{
   console.log(data);
