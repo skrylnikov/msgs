@@ -7,6 +7,7 @@ module.exports = env => {
     mode: "development",
     entry: "./web/index.tsx",
     output: {
+      webassemblyModuleFilename: "[modulehash].wasm",
       filename: "[name].js",
       path: __dirname + "/dist"
     },
@@ -24,9 +25,8 @@ module.exports = env => {
     module: {
       rules: [
         {
-          // make all files ending in .json5 use the `json5-loader`
-          test: /\.json5$/,
-          loader: 'json5-loader',
+          test: /\.wasm$/,
+          type: "webassembly/experimental"
         },
         {
           test: /\.tsx?$/,

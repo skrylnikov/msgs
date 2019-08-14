@@ -19,3 +19,4 @@ init();
 
 //@ts-ignore
 if (module.hot) module.hot.accept('./app', init);
+

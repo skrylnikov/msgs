@@ -8,12 +8,13 @@ import useClickAway from 'react-use/lib/useClickAway';
 
 interface Props {
   labelText: string;
-  color: string
+  color: string;
+  isPasswor?: boolean;
 
   onChange: (value: string)=>void;
 }
 
-export const InputComponent = ({labelText, color, onChange}: Props)=>{
+export const InputComponent = ({labelText, color, onChange, isPasswor=false}: Props)=>{
 
   const ref = useRef(null);
 
@@ -30,6 +31,7 @@ export const InputComponent = ({labelText, color, onChange}: Props)=>{
 
 return (<div style={{'--input-color':color}} ref={ref} class={wrapper} onClick={()=>changeFocused(true)}>
     <input 
+      type={isPasswor ?'password' :'input'}
       class={input} 
       value={value}
       onChange={((e)=>e.target instanceof HTMLInputElement && changeValue(e.target.value))}
