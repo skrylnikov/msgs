@@ -1,6 +1,7 @@
 import { senRequst } from './socket'
 import nanoid from 'nanoid';
 import { MessageTypes } from '../../api';
+import { encode, decode } from '@msgpack/msgpack';
 
 import {
   crypto_pwhash,
@@ -24,6 +25,7 @@ import {
   crypto_box_easy,
   crypto_box_NONCEBYTES,
   crypto_box_open_easy,
+  crypto_hash,
   randombytes_buf,
   to_base64,
   from_base64,
@@ -43,7 +45,6 @@ const createRootKey = (
   pwhash = crypto_pwhash(crypto_secretbox_KEYBYTES, password, salt, opsLimit, memLimit, algorithm);
   console.timeEnd();
   console.log(pwhash);
-  
 
 
   return {
@@ -77,12 +78,67 @@ export const register = async (username: string, password: string) => {
 
   if(a){
     decodeRootKey(password, a.rootKey.salt);
+    const check = crypto_hash(username, 'base64');
+
+    const {data, nonce} = a.profile;
+
+    const profileKey = crypto_kdf_derive_from_key(crypto_secretbox_KEYBYTES, 0, username, pwhash);
+    console.log({
+      data,
+      nonce,
+      profileKey,
+    });
+    
+    const profile: any = decode(crypto_secretbox_open_easy(from_base64(data), from_base64(nonce), profileKey));
+
+    if(profile.check === check){
+      console.log('success');
+    } else{
+      console.log({profile});
+      
+    }
+
   } else {
     const rootKey = createRootKey(password);
+
+    const profile = {
+      check: crypto_hash(username, 'base64'),
+    };
+    const profileKey = crypto_kdf_derive_from_key(crypto_secretbox_KEYBYTES, 0, username, pwhash);
+    const profileNonce = randombytes_buf(crypto_box_NONCEBYTES);
+    const encryptedProfile = crypto_secretbox_easy(encode(profile), profileNonce, profileKey, 'base64');
+
     await senRequst(MessageTypes.register, {
       username,
       rootKey,
+      profile:{
+        nonce: to_base64(profileNonce),
+        data: encryptedProfile,
+      }
     });
   }
+
+  /*
+  console.log(1);
+  
+  const data = {
+    check: crypto_hash(username, 'base64'),
+  };
+  console.log(2);
+
+  const dataKey = crypto_kdf_derive_from_key(crypto_secretbox_KEYBYTES, 0, username, pwhash);
+  console.log(3);
+  
+  const nonce = randombytes_buf(crypto_box_NONCEBYTES);
+  console.log(4);
+
+  const encryptedData = crypto_secretbox_easy(encode(data), nonce, dataKey);
+  console.log(5);
+
+  const r = crypto_secretbox_open_easy(encryptedData, nonce, dataKey);
+
+  console.log(decode(r));
+  */
+
     return true;
 }
